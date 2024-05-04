@@ -1,0 +1,50 @@
+<div class="container col-sm-4">
+    <div class="row justify-content-center">
+      <div class="col-sm-12">
+        <form class="mt-5 col-sm-12">
+          <div class="mb-1">
+            <label for="fullname" class="form-label">Full Name:</label>
+            <input type="text" class="form-control form-control-sm" id="fullname" name="fullname" [(ngModel)]="user.fullname" required>
+          </div>
+          <div class="mb-1">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" class="form-control form-control-sm" id="username" name="username" [(ngModel)]="user.username" required>
+          </div>
+          <div class="mb-1">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control form-control-sm" id="email" name="email" [(ngModel)]="user.email" required email>
+          </div>
+          <div class="mb-1">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control form-control-sm" id="password" name="password" [(ngModel)]="user.password"
+              #password="ngModel" required minlength="8" maxlength="20"
+              pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$">
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+              <div *ngIf="password.errors?.['required']">Password is required.</div>
+              <div *ngIf="password.errors?.['minlength']">Password must be at least 8 characters long.</div>
+              <div *ngIf="password.errors?.['maxlength']">Password cannot be more than 20 characters long.</div>
+              <div *ngIf="password.errors?.['pattern']">Password must contain at least one letter, one number, and one special character.</div>
+            </div>
+          </div>
+          <div class="mb-1">
+            <label for="city" class="form-label">City:</label>
+            <input type="text" class="form-control form-control-sm" id="city" name="city" [(ngModel)]="user.city">
+          </div>
+          <div class="mb-1">
+            <label for="address" class="form-label">Address:</label>
+            <textarea class="form-control form-control-sm" id="address" name="address" [(ngModel)]="user.address"></textarea>
+          </div>
+          <div class="mb-1">
+            <label for="logo" class="form-label">Logo:</label>
+            <input type="text" class="form-control form-control-sm" id="logo" name="logo" [(ngModel)]="user.logo">
+          </div>
+          <div class="mb-1">
+            <label for="role" class="form-label">Role:</label>
+            <input type="text" class="form-control form-control-sm" id="role" name="role" [(ngModel)]="user.role">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  

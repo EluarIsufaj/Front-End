@@ -1,0 +1,6 @@
+.product-thumbnail {
+    width: 100px; /* Set the desired width */
+    height: 100px; /* Set the desired height */
+    object-fit: cover; /* Ensure that the image covers the entire container while maintaining aspect ratio */
+  }
+  
