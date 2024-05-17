@@ -1,0 +1,101 @@
+<style>
+  .top-left-button {
+      position: absolute;
+      top: 10px; 
+      left: 10px;
+      z-index: 1000; 
+  }
+</style>
+
+<div class="container">
+  
+  <div class="btn btn-primary top-left-button" role="group" aria-label="Authentication Buttons">
+    
+    <button *ngIf="!productFormState" type="button" class="btn btn-primary" (click)="changeState(true)">Add Product</button>
+   
+    <button class="top-left-button" *ngIf="productFormState" type="button" class="btn btn-primary" (click)="changeState(false)">Back</button>
+  </div>
+</div>
+
+<div class="row justify-content-start container col-sm-6" *ngIf="productFormState">
+  <div class="row justify-content-start">
+    <div class="col-sm-12">
+      <form class="mt-5 col-sm-12" [formGroup]="productForm" (submit)="createProduct()"> 
+        <div class="mb-1">
+          <label for="title" class="form-label">Title:</label>
+          <input type="text" class="form-control form-control-sm" id="title" formControlName="title">
+          <div *ngIf="productForm.get('title')?.invalid && (productForm.get('title')?.dirty || productForm.get('title')?.touched)" class="text-danger">
+            <div *ngIf="productForm.get('title')?.errors?.['required']">Title is required.</div>
+            <div *ngIf="productForm.get('title')?.errors?.['minlength']">Title must be at least 3 characters long.</div>
+            <div *ngIf="productForm.get('title')?.errors?.['maxlength']">Title cannot be more than 20 characters long.</div>
+          </div> 
+        </div> 
+        
+        <div class="mb-1">
+          <label for="description" class="form-label">Description:</label>
+          <input type="text" class="form-control form-control-sm" id="description" formControlName="description">
+          <div *ngIf="productForm.get('description')?.invalid && (productForm.get('description')?.dirty || productForm.get('description')?.touched)" class="text-danger">
+            <div *ngIf="productForm.get('description')?.errors?.['required']">Description is required.</div>
+          </div> 
+        </div>
+
+
+        <div class="mb-1">
+          <label for="thumbnail" class="form-label">Thumbnail:</label>
+          <input type="text" class="form-control form-control-sm" id="thumbnail" formControlName="thumbnail">
+          <div *ngIf="productForm.get('thumbnail')?.invalid && (productForm.get('thumbnail')?.dirty || productForm.get('thumbnail')?.touched)" class="text-danger">
+            <div *ngIf="productForm.get('thumbnail')?.errors?.['required']">Description is required.</div>
+          </div> 
+        </div>
+
+        
+        <div class="form-group">
+          <label for="category">Category:</label>
+          <select formControlName="category" class="form-control" id="category">
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+          </select>
+          <div *ngIf="productForm.get('category')?.invalid && (productForm.get('category')?.dirty || productForm.get('category')?.touched)" class="text-danger">
+            <div *ngIf="productForm.get('category')?.errors?.['required']">Category is required.</div>
+          </div> 
+        </div>
+
+        <div class="form-group">
+          <label for="productType">Product Type:</label>
+          <select formControlName="productType" class="form-control" id="productType">
+            <option *ngFor="let type of productTypes" [value]="type">{{ type }}</option>
+          </select>
+          <div *ngIf="productForm.get('productType')?.invalid && (productForm.get('productType')?.dirty || productForm.get('productType')?.touched)" class="text-danger">
+            <div *ngIf="productForm.get('productType')?.errors?.['required']">Product Type is required.</div>
+          </div> 
+        </div>
+
+        <div class="mb-1">
+          <label for="price" class="form-label">Price:</label>
+          <input type="text" class="form-control form-control-sm" id="price" formControlName="price">
+          <div *ngIf="productForm.get('price')?.invalid && (productForm.get('price')?.dirty || productForm.get('price')?.touched)" class="text-danger">
+            <div *ngIf="productForm.get('price')?.errors?.['required']">Price is required.</div>
+            <div *ngIf="productForm.get('price')?.errors?.['pattern']">Only numbers are valid.</div>
+          </div> 
+        </div>
+
+        <div class="mb-1">
+          <div class="form-group">
+            <label for="Author">Author:</label>
+            <select formControlName="author" class="form-control" id="author">
+              <option *ngFor="let author of authors" [value]="author.id">{{ author.name }}</option>
+            </select>
+            <div *ngIf="productForm.get('author')?.invalid && (productForm.get('author')?.dirty || productForm.get('author')?.touched)" class="text-danger">
+              <div *ngIf="productForm.get('author')?.errors?.['required']">Author is required.</div>
+            </div> 
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+

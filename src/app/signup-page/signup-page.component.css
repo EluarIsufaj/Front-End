@@ -1,0 +1,14 @@
+.fixed-top {
+    left: 88%;
+    width: 10%;
+    z-index: 200; 
+  }
+
+.fixed-top-button {
+    margin-top: 3%;
+    position: fixed;
+    position: top;
+    left: 5%;
+    width: 10%;
+    z-index: 200; 
+  }

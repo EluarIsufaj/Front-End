@@ -1,1 +1,49 @@
-<app-storeui></app-storeui>
+<div *ngIf="user != null && !loginIn" class="btn-group position-fixed top-0 end-0 m-3" role="group" aria-label="Authentication Buttons">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img [src]="user.logo" class="rounded-circle img-thumbnail user-logo" alt="User Logo" style="width: 100px; height: 100px;">
+              <h5 class="card-title mt-3">{{ user.username }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<app-signup-page *ngIf="state != 'Signed'" (userSignIn)="updateUser($event)"  (processOfLoging)="changeLogIn($event)"></app-signup-page>
+
+
+<div class="row justify-content-start mb-5">
+    <div class="p-3 rounded">
+     <app-admin-panel *ngIf="user != null && user.role === 'Admin'  && !loginIn" (addingProduct)="updateProductAddingState($event)"></app-admin-panel>
+    </div>
+  </div>
+
+  <div *ngIf="!loginIn && !addingProduct" class="container">
+
+    <div class="row mb-3">
+      
+      <div class="col-md-3">
+        <label for="dropdown">Choose a category:</label>
+        <select id="dropdown" class="form-select" [(ngModel)]="selectedCategory" (ngModelChange)="showProductsFiltered($event)">
+          <option *ngFor="let option of categories" [ngValue]="option">
+            {{ option.name }}
+          </option>
+        </select>
+      </div>
+  
+     
+      <div class="col-md-6">
+        <div class="fixed-bottom d-flex justify-content-center mb-2">
+          <div class="p-3 rounded">
+            <app-product-list *ngIf="!loginIn" [newSelectedCategory]="selectedCategory"></app-product-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
